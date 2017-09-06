@@ -1,0 +1,6 @@
+C:\Users\MAESELA K\Desktop\WorkSpace\3rd Year\clients\Nombulelo\WareHouseSchool_Service\WareHouseSchool_Service\bin\WareHouseSchool_Service.dll.config
+C:\Users\MAESELA K\Desktop\WorkSpace\3rd Year\clients\Nombulelo\WareHouseSchool_Service\WareHouseSchool_Service\bin\WareHouseSchool_Service.dll
+C:\Users\MAESELA K\Desktop\WorkSpace\3rd Year\clients\Nombulelo\WareHouseSchool_Service\WareHouseSchool_Service\bin\WareHouseSchool_Service.pdb
+C:\Users\MAESELA K\Desktop\WorkSpace\3rd Year\clients\Nombulelo\WareHouseSchool_Service\WareHouseSchool_Service\obj\Debug\WareHouseSchool_Service.csprojResolveAssemblyReference.cache
+C:\Users\MAESELA K\Desktop\WorkSpace\3rd Year\clients\Nombulelo\WareHouseSchool_Service\WareHouseSchool_Service\obj\Debug\WareHouseSchool_Service.dll
+C:\Users\MAESELA K\Desktop\WorkSpace\3rd Year\clients\Nombulelo\WareHouseSchool_Service\WareHouseSchool_Service\obj\Debug\WareHouseSchool_Service.pdb
