@@ -17,6 +17,10 @@ namespace WareHoseSchool
             lh = new localhost.Service1();
             if (Session["Id"] != null)
             {
+                Login_link.Visible = false;
+                Register_link.Visible = false;
+                Logout_link.Visible = true;
+
                 int userId = Convert.ToInt32(Session["Id"]);
                 string authentication = Convert.ToString(Session["authenticationLevel"]);
                 if (authentication.Equals("C"))
@@ -35,12 +39,18 @@ namespace WareHoseSchool
                             }
                         }
                     }
-                    lalbol_Logout.Visible = true;
-                    Login_link.Visible = false;
-                    Register_link.Visible = false;
-                    Logout_link.Visible = true;
-
                     myCard_link.Visible = true;
+                    lalbol_Logout.Visible = true;
+                }
+                else if (authentication.Equals("M"))
+                {
+                    linkBook.Visible = false;
+                    linkStationary.Visible = false;
+                    linkDevice.Visible = false;
+                    linkNew.Visible = false;
+                    myCard_link.Visible = false;
+
+                    linkManage.Visible = true;
                 }
             }
         }

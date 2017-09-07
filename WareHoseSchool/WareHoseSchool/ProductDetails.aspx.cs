@@ -30,35 +30,62 @@ namespace WareHoseSchool
 
         protected void btnAddOrder_Click(object sender, EventArgs e)
         {
+            decimal price = 0;
             if (authentication.Equals("C"))
             {
                 foreach (var product in lh.getAllProducts())
                 {
                     if (productId == product.ProductId)
                     {
+                        if (Convert.ToInt32(txtQuantity.Value) > product.Quantity)
+                        {
+                            initialize();
+                            return;
+                        }
                         productTypeId = product.ProductTypeId;
+                        price = product.Price;
                     }
                 }
-                lh.addProductToCard(productId, true, productTypeId, true, Convert.ToInt32(Session["Id"]), true, Convert.ToInt32(txtQuantity.Value), true);
+                lh.addProductToCard(productId, true, productTypeId, true, Convert.ToInt32(Session["Id"]), true, Convert.ToInt32(txtQuantity.Value), true, price, true);
                 Response.Redirect("ProductCardDetails.aspx");
+
             }
         }
 
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            authentication = Convert.ToString(Session["authenticationLevel"]);
+            int.TryParse(Request.QueryString["producttypeId"], out productId);
+            lh = new localhost.Service1();
+            initialize();
+        }
+
+        public void initialize()
+        {
+
             if (Session["Id"] != null)
             {
-                loginLink.Visible = false;
 
+
+                loginLink.Visible = false;
+                foreach (var product in lh.getAllProducts())
+                {
+                    if (productId == product.ProductId)
+                    {
+                        _maxQuantity = product.Quantity;
+                        // txtQuantity.Value.m = _maxQuantity;
+                    }
+                }
 
                 userId = Convert.ToInt32(Session["Id"]);
-                 authentication = Convert.ToString(Session["authenticationLevel"]);
+
                 if (authentication.Equals("C"))
                 {
                     txtQuantity.Visible = true;
                     btnAddOrder.Visible = true;
-                }else if (authentication.Equals("M"))
+                }
+                else if (authentication.Equals("M"))
                 {
                     btnAddOrder.Text = "Edit product";
                 }
@@ -67,8 +94,8 @@ namespace WareHoseSchool
             {
                 btnAddOrder.Visible = false;
             }
-            int.TryParse(Request.QueryString["producttypeId"], out productId);
-            lh = new localhost.Service1();
+
+
             if (!Page.IsPostBack)
             {
                 foreach (var product in lh.getAllProducts())
@@ -130,7 +157,6 @@ namespace WareHoseSchool
                     }
                 }
             }
-
         }
 
         //protected void btnBuy_Click(object sender, EventArgs e)

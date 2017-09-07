@@ -34,6 +34,7 @@
       <Column Name="Price" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Image64String" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="isRemoved" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProductCard" Member="ProductCards">
@@ -46,6 +47,7 @@
       <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="isRemoved" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
       <Column Name="isRemovedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="productPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProductType" Member="ProductTypes">

@@ -102,10 +102,42 @@ namespace WareHouseSchool_Service
             product.Price = Convert.ToDecimal(price);
             product.Quantity = quantity;
             product.Image64String = image64String;
+            product.isRemoved = "false";
             db.Products.InsertOnSubmit(product);
             db.SubmitChanges();
         }
 
+        public void updateProduct(int productId, int productTypeId, string description, double price, int quantity, string image64String)
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            foreach (var product in db.Products)
+            {
+                if(productId == product.ProductId)
+                {
+                    product.ProductTypeId = productTypeId;
+                    //product.Date = DateTime.Now;
+                    product.Description = description;
+                    product.Price = Convert.ToDecimal(price);
+                    product.Quantity = quantity;
+                    product.Image64String = image64String;
+                    //db.Products.InsertOnSubmit(product);
+                    db.SubmitChanges();
+                }
+            }
+        }
+
+        public void deleteProduct(int productId)//dont delete recod just set it to false
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            foreach (var product in db.Products)
+            {
+                if (productId == product.ProductId)
+                {
+                    product.isRemoved = "true";
+                    db.SubmitChanges();
+                }
+            }
+        }
         public List<Product> getAllProducts()
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
@@ -121,7 +153,7 @@ namespace WareHouseSchool_Service
 
 
         //---------------------------Card functionality ------------------------------------------
-        public void addProductToCard(int productId, int ProductTypeId, int userId, int quantity)
+        public void addProductToCard(int productId, int ProductTypeId, int userId, int quantity,decimal price)
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
             ProductCard card = new ProductCard();
@@ -130,10 +162,11 @@ namespace WareHouseSchool_Service
             card.DateTime = DateTime.Now;
             card.UserId = userId;
             card.Quantity = quantity;
+            card.productPrice = price;
             card.isRemoved = "false";
             db.ProductCards.InsertOnSubmit(card);
             db.SubmitChanges();
-       }
+        }
 
         public void removeProductFromCard(int cardId)
         {
@@ -173,83 +206,86 @@ namespace WareHouseSchool_Service
             return (from current in db.ProductCards where current.UserId.Equals(prodyctTypeId) select current).ToList();
         }
 
-        public void DeleteProductInCard(int cardId)
+        public void updateProductInCard(int cardId, int productId)
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
             ProductCard productToDelete = (from p in db.ProductCards where cardId == p.CardId select p).Single();
-            db.ProductCards.DeleteOnSubmit(productToDelete);
+            Product product = (from p in db.Products where productId == p.ProductId select p).Single();
+
+            product.Quantity -= Convert.ToInt32(productToDelete.Quantity);
+           // db.ProductCards.DeleteOnSubmit(productToDelete);
             db.SubmitChanges();
         }
 
-    //--------------------------------------------Order functionality-----------------------------------------------------
+        //--------------------------------------------Order functionality-----------------------------------------------------
 
-    public void addOrder(int ProductID, int CardID, decimal OrderPrice, int userId, int productTypeId)
-    {
-        DataClasses1DataContext db = new DataClasses1DataContext();
-        Order order = new Order();
-        order.ProductID = ProductID;
-        order.CardID = CardID;
-        order.OrderPrice = OrderPrice;
-        order.UserId = userId;
-        order.ProductTypeId = productTypeId;
-        order.ClientStatusId = 1;
-        order.BackEndStatusId = 1;
-        order.OrderDate = DateTime.Now;
-        db.Orders.InsertOnSubmit(order);
-        db.SubmitChanges();
-        DeleteProductInCard(CardID);
-    }
-
-    public void updateOrderStatusClient(int orderId, int clientStatusId)
-    {
-        DataClasses1DataContext db = new DataClasses1DataContext();
-        foreach (var order in db.Orders)
+        public void addOrder(int ProductID, int CardID, decimal OrderPrice, int userId, int productTypeId)
         {
-            if (order.OrderId == orderId)
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            Order order = new Order();
+            order.ProductID = ProductID;
+            order.CardID = CardID;
+            order.OrderPrice = OrderPrice;
+            order.UserId = userId;
+            order.ProductTypeId = productTypeId;
+            order.ClientStatusId = 1;
+            order.BackEndStatusId = 1;
+            order.OrderDate = DateTime.Now;
+            db.Orders.InsertOnSubmit(order);
+            db.SubmitChanges();
+            updateProductInCard(CardID, ProductID);
+        }
+
+        public void updateOrderStatusClient(int orderId, int clientStatusId)
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            foreach (var order in db.Orders)
             {
-                order.ClientStatusId = clientStatusId;
-                db.SubmitChanges();
+                if (order.OrderId == orderId)
+                {
+                    order.ClientStatusId = clientStatusId;
+                    db.SubmitChanges();
+                }
             }
         }
-    }
 
-    public void updateOrderStatusBackend(int orderId, int backEndStatusId)
-    {
-        DataClasses1DataContext db = new DataClasses1DataContext();
-        foreach (var order in db.Orders)
+        public void updateOrderStatusBackend(int orderId, int backEndStatusId)
         {
-            if (order.OrderId == orderId)
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            foreach (var order in db.Orders)
             {
-                order.BackEndStatusId = backEndStatusId;
-                db.SubmitChanges();
+                if (order.OrderId == orderId)
+                {
+                    order.BackEndStatusId = backEndStatusId;
+                    db.SubmitChanges();
+                }
             }
         }
-    }
 
-    public List<Order> getAllOders()
-    {
-        DataClasses1DataContext db = new DataClasses1DataContext();
-        return (from current in db.Orders select current).ToList();
-    }
+        public List<Order> getAllOders()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            return (from current in db.Orders select current).ToList();
+        }
 
-    public List<Order> getAllOrdersByUserId(int userId)
-    {
-        DataClasses1DataContext db = new DataClasses1DataContext();
-        return (from current in db.Orders where current.UserId.Equals(userId) select current).ToList();
-    }
+        public List<Order> getAllOrdersByUserId(int userId)
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            return (from current in db.Orders where current.UserId.Equals(userId) select current).ToList();
+        }
 
 
-    //-----------------------------------------------Statuses Functionality----------------------------------------
-    public List<ClientStatuse> getAllClientStatus()
-    {
-        DataClasses1DataContext db = new DataClasses1DataContext();
-        return (from current in db.ClientStatuses select current).ToList();
-    }
+        //-----------------------------------------------Statuses Functionality----------------------------------------
+        public List<ClientStatuse> getAllClientStatus()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            return (from current in db.ClientStatuses select current).ToList();
+        }
 
-    public List<BackEndStatus> getAllBackEndStatus()
-    {
-        DataClasses1DataContext db = new DataClasses1DataContext();
-        return (from current in db.BackEndStatus select current).ToList();
+        public List<BackEndStatus> getAllBackEndStatus()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            return (from current in db.BackEndStatus select current).ToList();
+        }
     }
-}
 }

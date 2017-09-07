@@ -48,6 +48,7 @@
       <xs:element minOccurs="0" name="ProductId" type="xs:int" />
       <xs:element minOccurs="0" name="ProductTypeId" type="xs:int" />
       <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="isRemoved" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Product" nillable="true" type="tns:Product" />
@@ -67,6 +68,7 @@
       <xs:element minOccurs="0" name="UserId" type="xs:int" />
       <xs:element minOccurs="0" name="isRemoved" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="isRemovedDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="productPrice" nillable="true" type="xs:decimal" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ProductCard" nillable="true" type="tns:ProductCard" />

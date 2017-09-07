@@ -18,12 +18,14 @@ namespace WareHoseSchool
 
         protected void btnOrder_Click(object sender, EventArgs e)
         {
+            decimal totalPrice = 0;
             userId = Convert.ToInt32(Session["Id"]);
             foreach (var productsIncard in lh.getAllProductsInCardByUserId(userId, true))
             {
                 if (productsIncard.isRemoved.Equals("false"))
                 {
-                    lh.addOrder(productsIncard.ProductId, true, productsIncard.CardId, true, _TotalPrice, true, userId, true, productsIncard.ProductTypeId,true);
+                    totalPrice += Convert.ToDecimal(productsIncard.productPrice + 40);
+                    lh.addOrder(productsIncard.ProductId, true, productsIncard.CardId, true, totalPrice, true, userId, true, productsIncard.ProductTypeId, true);
                 }
             }
             Response.Redirect("OrderedProducts.aspx");

@@ -37,6 +37,10 @@ namespace WareHoseSchool.localhost {
         
         private System.Threading.SendOrPostCallback addProductTypeOperationCompleted;
         
+        private System.Threading.SendOrPostCallback updateProductOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback deleteProductOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getAllProductTypesOperationCompleted;
         
         private System.Threading.SendOrPostCallback addProductOperationCompleted;
@@ -120,6 +124,12 @@ namespace WareHoseSchool.localhost {
         
         /// <remarks/>
         public event addProductTypeCompletedEventHandler addProductTypeCompleted;
+        
+        /// <remarks/>
+        public event updateProductCompletedEventHandler updateProductCompleted;
+        
+        /// <remarks/>
+        public event deleteProductCompletedEventHandler deleteProductCompleted;
         
         /// <remarks/>
         public event getAllProductTypesCompletedEventHandler getAllProductTypesCompleted;
@@ -305,6 +315,82 @@ namespace WareHoseSchool.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IService1/updateProduct", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void updateProduct(int productId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool productIdSpecified, int productTypeId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool productTypeIdSpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string description, double price, [System.Xml.Serialization.XmlIgnoreAttribute()] bool priceSpecified, int quantity, [System.Xml.Serialization.XmlIgnoreAttribute()] bool quantitySpecified, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string image64String) {
+            this.Invoke("updateProduct", new object[] {
+                        productId,
+                        productIdSpecified,
+                        productTypeId,
+                        productTypeIdSpecified,
+                        description,
+                        price,
+                        priceSpecified,
+                        quantity,
+                        quantitySpecified,
+                        image64String});
+        }
+        
+        /// <remarks/>
+        public void updateProductAsync(int productId, bool productIdSpecified, int productTypeId, bool productTypeIdSpecified, string description, double price, bool priceSpecified, int quantity, bool quantitySpecified, string image64String) {
+            this.updateProductAsync(productId, productIdSpecified, productTypeId, productTypeIdSpecified, description, price, priceSpecified, quantity, quantitySpecified, image64String, null);
+        }
+        
+        /// <remarks/>
+        public void updateProductAsync(int productId, bool productIdSpecified, int productTypeId, bool productTypeIdSpecified, string description, double price, bool priceSpecified, int quantity, bool quantitySpecified, string image64String, object userState) {
+            if ((this.updateProductOperationCompleted == null)) {
+                this.updateProductOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateProductOperationCompleted);
+            }
+            this.InvokeAsync("updateProduct", new object[] {
+                        productId,
+                        productIdSpecified,
+                        productTypeId,
+                        productTypeIdSpecified,
+                        description,
+                        price,
+                        priceSpecified,
+                        quantity,
+                        quantitySpecified,
+                        image64String}, this.updateProductOperationCompleted, userState);
+        }
+        
+        private void OnupdateProductOperationCompleted(object arg) {
+            if ((this.updateProductCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.updateProductCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IService1/deleteProduct", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void deleteProduct(int productId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool productIdSpecified) {
+            this.Invoke("deleteProduct", new object[] {
+                        productId,
+                        productIdSpecified});
+        }
+        
+        /// <remarks/>
+        public void deleteProductAsync(int productId, bool productIdSpecified) {
+            this.deleteProductAsync(productId, productIdSpecified, null);
+        }
+        
+        /// <remarks/>
+        public void deleteProductAsync(int productId, bool productIdSpecified, object userState) {
+            if ((this.deleteProductOperationCompleted == null)) {
+                this.deleteProductOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeleteProductOperationCompleted);
+            }
+            this.InvokeAsync("deleteProduct", new object[] {
+                        productId,
+                        productIdSpecified}, this.deleteProductOperationCompleted, userState);
+        }
+        
+        private void OndeleteProductOperationCompleted(object arg) {
+            if ((this.deleteProductCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.deleteProductCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IService1/getAllProductTypes", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
         [return: System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/WareHouseSchool_Service")]
@@ -439,7 +525,7 @@ namespace WareHoseSchool.localhost {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IService1/addProductToCard", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void addProductToCard(int productId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool productIdSpecified, int ProductTypeId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool ProductTypeIdSpecified, int userId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool userIdSpecified, int quantity, [System.Xml.Serialization.XmlIgnoreAttribute()] bool quantitySpecified) {
+        public void addProductToCard(int productId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool productIdSpecified, int ProductTypeId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool ProductTypeIdSpecified, int userId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool userIdSpecified, int quantity, [System.Xml.Serialization.XmlIgnoreAttribute()] bool quantitySpecified, decimal price, [System.Xml.Serialization.XmlIgnoreAttribute()] bool priceSpecified) {
             this.Invoke("addProductToCard", new object[] {
                         productId,
                         productIdSpecified,
@@ -448,16 +534,18 @@ namespace WareHoseSchool.localhost {
                         userId,
                         userIdSpecified,
                         quantity,
-                        quantitySpecified});
+                        quantitySpecified,
+                        price,
+                        priceSpecified});
         }
         
         /// <remarks/>
-        public void addProductToCardAsync(int productId, bool productIdSpecified, int ProductTypeId, bool ProductTypeIdSpecified, int userId, bool userIdSpecified, int quantity, bool quantitySpecified) {
-            this.addProductToCardAsync(productId, productIdSpecified, ProductTypeId, ProductTypeIdSpecified, userId, userIdSpecified, quantity, quantitySpecified, null);
+        public void addProductToCardAsync(int productId, bool productIdSpecified, int ProductTypeId, bool ProductTypeIdSpecified, int userId, bool userIdSpecified, int quantity, bool quantitySpecified, decimal price, bool priceSpecified) {
+            this.addProductToCardAsync(productId, productIdSpecified, ProductTypeId, ProductTypeIdSpecified, userId, userIdSpecified, quantity, quantitySpecified, price, priceSpecified, null);
         }
         
         /// <remarks/>
-        public void addProductToCardAsync(int productId, bool productIdSpecified, int ProductTypeId, bool ProductTypeIdSpecified, int userId, bool userIdSpecified, int quantity, bool quantitySpecified, object userState) {
+        public void addProductToCardAsync(int productId, bool productIdSpecified, int ProductTypeId, bool ProductTypeIdSpecified, int userId, bool userIdSpecified, int quantity, bool quantitySpecified, decimal price, bool priceSpecified, object userState) {
             if ((this.addProductToCardOperationCompleted == null)) {
                 this.addProductToCardOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddProductToCardOperationCompleted);
             }
@@ -469,7 +557,9 @@ namespace WareHoseSchool.localhost {
                         userId,
                         userIdSpecified,
                         quantity,
-                        quantitySpecified}, this.addProductToCardOperationCompleted, userState);
+                        quantitySpecified,
+                        price,
+                        priceSpecified}, this.addProductToCardOperationCompleted, userState);
         }
         
         private void OnaddProductToCardOperationCompleted(object arg) {
@@ -1384,6 +1474,10 @@ namespace WareHoseSchool.localhost {
         
         private bool isRemovedDateFieldSpecified;
         
+        private System.Nullable<decimal> productPriceField;
+        
+        private bool productPriceFieldSpecified;
+        
         /// <remarks/>
         public int CardId {
             get {
@@ -1543,6 +1637,28 @@ namespace WareHoseSchool.localhost {
                 this.isRemovedDateFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<decimal> productPrice {
+            get {
+                return this.productPriceField;
+            }
+            set {
+                this.productPriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool productPriceSpecified {
+            get {
+                return this.productPriceFieldSpecified;
+            }
+            set {
+                this.productPriceFieldSpecified = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1576,6 +1692,8 @@ namespace WareHoseSchool.localhost {
         private int quantityField;
         
         private bool quantityFieldSpecified;
+        
+        private string isRemovedField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -1702,6 +1820,17 @@ namespace WareHoseSchool.localhost {
             }
             set {
                 this.quantityFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string isRemoved {
+            get {
+                return this.isRemovedField;
+            }
+            set {
+                this.isRemovedField = value;
             }
         }
     }
@@ -1857,6 +1986,14 @@ namespace WareHoseSchool.localhost {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
     public delegate void addProductTypeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    public delegate void updateProductCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    public delegate void deleteProductCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]

@@ -27,6 +27,12 @@ namespace WareHouseSchool_Service
         void addProductType(string productCategory, string productTypeName);
 
         [OperationContract]
+        void updateProduct(int productId, int productTypeId, string description, double price, int quantity, string image64String);
+
+        [OperationContract]
+        void deleteProduct(int productId);
+
+        [OperationContract]
         List<ProductType> getAllProductTypes();
 
         [OperationContract]
@@ -38,9 +44,9 @@ namespace WareHouseSchool_Service
         [OperationContract]
         List<Product> getAllProductsByTypeId(int productTypeId);
 
-        //-------------------Card Fuctionality-------------------------
+        //-------------------Card Fuctionality--------------------------------------------------------
         [OperationContract]
-        void addProductToCard(int productId, int ProductTypeId, int userId, int quantity);
+        void addProductToCard(int productId, int ProductTypeId, int userId, int quantity, decimal price);
 
         [OperationContract]
         void removeProductFromCard(int cardId);
