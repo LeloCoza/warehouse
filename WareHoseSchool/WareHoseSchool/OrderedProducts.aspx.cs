@@ -13,6 +13,7 @@ namespace WareHoseSchool
         public int _numItems = 0, _totalCharges = 0;
         public decimal _priceOfItems = 0;
         public decimal _TotalPrice = 0;
+        int quantity = 0;
 
         int userId;
         protected void Page_Load(object sender, EventArgs e)
@@ -38,8 +39,8 @@ namespace WareHoseSchool
                         string imageString = "", category = "", typeName = "";
                         decimal price = 0;
 
-                        int quantity = 0;
-                        string status="";
+                       
+                        string status = "";
                         foreach (var productsIncard in lh.getAllProducts())
                         {
 
@@ -47,10 +48,21 @@ namespace WareHoseSchool
                             {
                                 _priceOfItems += Math.Round(productsIncard.Price, 2);
                                 imageString = productsIncard.Image64String;
-                                price = Math.Round(productsIncard.Price, 2);
-                                quantity = productsIncard.Quantity;
+                               
+                                //quantity = cardProduct.;
                             }
                         }
+
+
+                        foreach (var card in lh.getAllProductsInCardByUserId(userId, true))
+                        {
+                            if (card.CardId == cardProduct.CardID)
+                            {
+                                quantity = Convert.ToInt32(card.Quantity);
+                                price = Math.Round(Convert.ToDecimal( card.productPrice), 2);
+                            }
+                        }
+
                         foreach (var productTypeIncard in lh.getAllProductTypes())
                         {
                             if (cardProduct.ProductTypeId == productTypeIncard.productTypeId)
@@ -59,15 +71,15 @@ namespace WareHoseSchool
                                 typeName = productTypeIncard.productTypeName;
                             }
                         }
-                       
+
                         foreach (var clientStatus in lh.getAllClientStatus())
                         {
-                            if(clientStatus.ClientStatusId == cardProduct.ClientStatusId)
+                            if (clientStatus.ClientStatusId == cardProduct.ClientStatusId)
                             {
                                 status = clientStatus.ClientStatusName;
                             }
                         }
-                            htmlText += "<img src='data:image/jpeg;base64," + imageString + "' class='img-responsive' alt=''></div>";
+                        htmlText += "<img src='data:image/jpeg;base64," + imageString + "' class='img-responsive' alt=''></div>";
                         htmlText += "<div class='cart-item-info'>";
                         int modelNumber = 3578 + cardProduct.ProductID;
                         htmlText += "<h3><a href='#'>" + category + ": " + typeName + "</a><span>Model No: " + modelNumber + "</span></h3>";
@@ -75,7 +87,7 @@ namespace WareHoseSchool
                         htmlText += "<li><p>Qty : " + quantity + "</p></li></ul>";
                         htmlText += "<div class='delivery'><p>Oder Date : " + cardProduct.OrderDate + "</p>";
 
-                        htmlText += "<span>Status: "+ status +"</span>";
+                        htmlText += "<span>Status: " + status + "</span>";
                         htmlText += "<div class='clearfix'></div>";
                         htmlText += "</div></div><div class='clearfix'></div></div>";
 

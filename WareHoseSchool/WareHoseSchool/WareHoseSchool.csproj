@@ -68,11 +68,13 @@
   <ItemGroup>
     <Content Include="AddProduct.aspx" />
     <Content Include="Catalog.aspx" />
+    <Content Include="EditProduct.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="OrderedProducts.aspx" />
     <Content Include="packages.config" />
     <Content Include="Home.Master" />
+    <None Include="Properties\PublishProfiles\myweb.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -80,6 +82,7 @@
     <Content Include="ProductCardDetails.aspx" />
     <Content Include="ProductDetails.aspx" />
     <Content Include="removeItem.aspx" />
+    <Content Include="RemoveProduct.aspx" />
     <Content Include="Web References\localhost\Product.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
@@ -142,6 +145,13 @@
     </Compile>
     <Compile Include="Catalog.aspx.designer.cs">
       <DependentUpon>Catalog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditProduct.aspx.cs">
+      <DependentUpon>EditProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditProduct.aspx.designer.cs">
+      <DependentUpon>EditProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -211,6 +221,13 @@
     </Compile>
     <Compile Include="removeItem.aspx.designer.cs">
       <DependentUpon>removeItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RemoveProduct.aspx.cs">
+      <DependentUpon>RemoveProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RemoveProduct.aspx.designer.cs">
+      <DependentUpon>RemoveProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="Web References\localhost\Reference.cs">
       <AutoGen>True</AutoGen>

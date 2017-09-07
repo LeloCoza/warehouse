@@ -586,6 +586,8 @@ namespace WareHouseSchool_Service
 		
 		private string _Image64String;
 		
+		private string _isRemoved;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -604,6 +606,8 @@ namespace WareHouseSchool_Service
     partial void OnQuantityChanged();
     partial void OnImage64StringChanging(string value);
     partial void OnImage64StringChanged();
+    partial void OnisRemovedChanging(string value);
+    partial void OnisRemovedChanged();
     #endregion
 		
 		public Product()
@@ -751,6 +755,26 @@ namespace WareHouseSchool_Service
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isRemoved", DbType="VarChar(5)")]
+		public string isRemoved
+		{
+			get
+			{
+				return this._isRemoved;
+			}
+			set
+			{
+				if ((this._isRemoved != value))
+				{
+					this.OnisRemovedChanging(value);
+					this.SendPropertyChanging();
+					this._isRemoved = value;
+					this.SendPropertyChanged("isRemoved");
+					this.OnisRemovedChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -794,6 +818,8 @@ namespace WareHouseSchool_Service
 		
 		private System.Nullable<System.DateTime> _isRemovedDate;
 		
+		private System.Nullable<decimal> _productPrice;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -814,6 +840,8 @@ namespace WareHouseSchool_Service
     partial void OnisRemovedChanged();
     partial void OnisRemovedDateChanging(System.Nullable<System.DateTime> value);
     partial void OnisRemovedDateChanged();
+    partial void OnproductPriceChanging(System.Nullable<decimal> value);
+    partial void OnproductPriceChanged();
     #endregion
 		
 		public ProductCard()
@@ -977,6 +1005,26 @@ namespace WareHouseSchool_Service
 					this._isRemovedDate = value;
 					this.SendPropertyChanged("isRemovedDate");
 					this.OnisRemovedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_productPrice", DbType="Money")]
+		public System.Nullable<decimal> productPrice
+		{
+			get
+			{
+				return this._productPrice;
+			}
+			set
+			{
+				if ((this._productPrice != value))
+				{
+					this.OnproductPriceChanging(value);
+					this.SendPropertyChanging();
+					this._productPrice = value;
+					this.SendPropertyChanged("productPrice");
+					this.OnproductPriceChanged();
 				}
 			}
 		}

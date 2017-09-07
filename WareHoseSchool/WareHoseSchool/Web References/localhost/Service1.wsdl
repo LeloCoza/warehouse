@@ -31,6 +31,18 @@
   <wsdl:message name="IService1_addProductType_OutputMessage">
     <wsdl:part name="parameters" element="tns:addProductTypeResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_updateProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateProduct" />
+  </wsdl:message>
+  <wsdl:message name="IService1_updateProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_deleteProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:deleteProduct" />
+  </wsdl:message>
+  <wsdl:message name="IService1_deleteProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:deleteProductResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_getAllProductTypes_InputMessage">
     <wsdl:part name="parameters" element="tns:getAllProductTypes" />
   </wsdl:message>
@@ -150,6 +162,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/addProductType" message="tns:IService1_addProductType_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/addProductTypeResponse" message="tns:IService1_addProductType_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="updateProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/updateProduct" message="tns:IService1_updateProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/updateProductResponse" message="tns:IService1_updateProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/deleteProduct" message="tns:IService1_deleteProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/deleteProductResponse" message="tns:IService1_deleteProduct_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="getAllProductTypes">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/getAllProductTypes" message="tns:IService1_getAllProductTypes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/getAllProductTypesResponse" message="tns:IService1_getAllProductTypes_OutputMessage" />
@@ -250,6 +270,24 @@
     </wsdl:operation>
     <wsdl:operation name="addProductType">
       <soap:operation soapAction="http://tempuri.org/IService1/addProductType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateProduct">
+      <soap:operation soapAction="http://tempuri.org/IService1/updateProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProduct">
+      <soap:operation soapAction="http://tempuri.org/IService1/deleteProduct" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
